@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Web RTC Demo</h1>
+
+    <div>
+        <h2>Basic Info</h2>
+        <div>Age: <input type="number" id="localAge" value="18"/></div>
+        <div>Gender: <select id="localGender">
+            <option value="0">Unspecified</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="3">Other</option>
+        </select>
+        </div>
+        <div>Tags: <input type="text" id="localTags" /></div>
+
+        <hr/>
+
+        <h2>Match With</h2>
+        <div>Age: <input type="text" id="matchAge" value="18"/></div>
+        <div>Gender: <select id="matchGender">
+            <option value="0">Unspecified</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="3">Other</option>
+        </select>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div id="connectionStatus">
+        Disconnected
+    </div>
+
+    <div id="messages">
+        
+    </div>
+    <input type="text" id="inMsg" />
+    <br/>
+
+    <input type="button" value="Connect" id="connect" />
+    <input type="button" value="Cancel" id="cancel" disabled />
+
+    <!-- <select id="availableCameras"></select>
+
+    <div>
+        <div>Height: <input type="number" id="localHeight" value="720" /></div>
+        <div>Width: <input type="number" id="localWidth" value="1280" /></div>
+    </div>
+
+    <video id="localVideo" autoplay playsinline controls="false"/> -->
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/jquery.min.js"></script>
+    <script type="text/javascript" src="/index.js"></script>
+</body>
+</html>
