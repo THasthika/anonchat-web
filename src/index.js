@@ -3,6 +3,8 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 
+const PORT = process.env.PORT || 3000;
+
 app.use(express.static('./public'));
 
 const { Server } = require("socket.io");
@@ -178,6 +180,6 @@ io.on('connection', (socket) => {
 
 });
 
-server.listen(80, () => {
-    console.log('listening on *:80');
+server.listen(PORT, () => {
+    console.log('listening on *:' + PORT);
 });
