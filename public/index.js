@@ -3,7 +3,7 @@ var gConnected = false;
 
 const $inMsg = $('input#inMsg');
 const $messages = $('div#messages');
-const $connectionStatus = $('#connectionStatus');
+const $connectionStatus = $('#connectionStatus .status');
 
 const $connect = $('#connect');
 const $cancel = $('#cancel');
@@ -37,8 +37,21 @@ function htmlToElement(html) {
     return $.parseHTML(html);
 }
 
-function addMsg(from, msg) {
-    const newMsg = htmlToElement('<p><span><span class="from">'+from+'</span></span> - <span class="msg">'+msg+'</span></p>');
+function addMsg(from, msg, side) {
+    if (!side) {
+        side = 'left';
+    }
+    console.log(side);
+    const content = `
+    <div class="flex-initial flex ${(side == 'right') ? 'flex-row-reverse' : 'flex-row'}">
+        <span class="flex-initial p-2 m-1 shadow">
+            <span class="from text-xs block">${from}</span>
+            <span class="content">${msg}</span>
+        </span>
+    </div>
+    `
+
+    const newMsg = htmlToElement(content);
     $messages.append(newMsg);
 }
 
@@ -46,7 +59,7 @@ $inMsg.on("keyup", (e) => {
     if(e.key == "Enter") {
         newMsg = $inMsg.val();
         $inMsg.val("");
-        addMsg("Me", newMsg);
+        addMsg("Me", newMsg, 'right');
         sendMsgToRemote(newMsg);
     }
 })
@@ -159,15 +172,18 @@ $cancel.on('click', () => {
 function configureChannel(channel) {
     channel.onmessage =e =>  {
         console.log(e);
-        addMsg('Stranger', e.data)
+        addMsg('Stranger', e.data, 'left')
     }
     channel.onopen = e => {
         console.log("Connected");
         $connect.attr('value', 'Connected');
         gConnected = true;
+        setConnectionStatus('connected');
     };
     channel.onclose = async e => {
         console.log("Disconnected");
+        setConnectionStatus('disconnected');
+        $messages.html('');
         gConnected = false;
         gPending = false;
         $connect.removeAttr('disabled');

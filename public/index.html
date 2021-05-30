@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/tailwind.css">
     <title>Document</title>
+    <style type="text/css">
+    .label {
+        width: 100px;
+        text-align: right;
+    }
+    </style>
 </head>
 <body>
 
@@ -14,62 +20,65 @@
         <h1 class="text-xl">Random Chat</h1>
         <hr />
 
-        <div class="rounded shadow-md p-1 my-5">
-            <h2 class="text-lg mb-5">Basic Info</h2>
-            <div class="flex flex-row flex-wrap">
-                <div class="flex-initial pr-2 py-2">Age:</div>
-                <div class="flex-auto">
-                    <input type="number" id="localAge" value="18" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+        <div class="flex flex-col md:flex-row">
+            <div class="rounded shadow-md p-1 my-5 flex-1 p-5 m-3">
+                <h2 class="text-lg mb-5">Basic Info</h2>
+                <div class="flex flex-row flex-wrap">
+                    <div class="flex-initial pr-2 py-2 label">Age:</div>
+                    <div class="flex-auto">
+                        <input type="number" id="localAge" value="18" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                    </div>
                 </div>
-            </div>
-            <div class="flex flex-row flex-wrap">
-                <div class="flex-initial pr-2 py-2">Tags:</div>
-                <div class="flex-auto">
-                    <input type="text" id="localTags" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                <div class="flex flex-row flex-wrap">
+                    <div class="flex-initial pr-2 py-2 label">Tags:</div>
+                    <div class="flex-auto">
+                        <input type="text" id="localTags" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                    </div>
                 </div>
-            </div>
-            <div class="flex flex-row flex-wrap">
-                <div class="flex-initial pr-2 py-2">Gender:</div>
-                <div class="flex-auto">
-                    <select id="localGender" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="0">Unspecified</option>
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
-                        <option value="3">Other</option>
-                    </select>
+                <div class="flex flex-row flex-wrap">
+                    <div class="flex-initial pr-2 py-2 label">Gender:</div>
+                    <div class="flex-auto">
+                        <select id="localGender" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="0">Unspecified</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Other</option>
+                        </select>
+                    </div>
                 </div>
+    
             </div>
-
-        </div>
-
-        <div class="rounded shadow-md p-1 my-5">
-            <h2 class="text-lg mb-5">Match With</h2>
-            <div class="flex flex-row flex-wrap"></div>
-                <div class="flex-initial pr-2 py-2">Age:</div>
-                <div class="flex-auto">
-                    <input type="text" id="matchAge" value="18" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+    
+            <div class="rounded shadow-md p-1 my-5 flex-1 p-5 m-3">
+                <h2 class="text-lg mb-5">Match With</h2>
+                <div class="flex flex-row flex-wrap">
+                    <div class="flex-initial pr-2 py-2 label">Age:</div>
+                    <div class="flex-auto">
+                        <input type="text" id="matchAge" value="18" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                    </div>
                 </div>
-            </div>
-            <div class="flex flex-row flex-wrap">
-                <div class="flex-initial pr-2 py-2">Gender:</div>
-                <div class="flex-auto">
-                    <select id="matchGender">
-                        <option value="0">Unspecified</option>
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
-                        <option value="3">Other</option>
-                    </select>
+                <div class="flex flex-row flex-wrap">
+                    <div class="flex-initial pr-2 py-2 label">Gender:</div>
+                    <div class="flex-auto">
+                        <select id="matchGender" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="0">Unspecified</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Other</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="rounded p-1">
             <div id="connectionStatus">
-                Disconnected
+                <span>Status: </span>
+                <span class="status">Disconnected</span>
             </div>
     
             <div class="flex flex-col">
-                <div class="flex-1 p-5" id="messages">
+                <div id="messages" class="flex-initial flex flex-col mb-3">
                 </div>
                 <input type="text" id="inMsg" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
             </div>
