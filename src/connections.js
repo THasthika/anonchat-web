@@ -73,7 +73,7 @@ function getConnection(id) {
 
 function findMatch(id) {
 
-    // const myconn = connections[id];
+    const myConn = connections[id];
 
     const partner = Object.entries(connections).find(([pid, _]) => {
         if (pid == id)
@@ -81,6 +81,19 @@ function findMatch(id) {
         if (!connections[pid].pending)
             return false;
         // filter by other stuff
+
+        const partnerConn = connections[pid];
+
+        // check age matching
+        if (myConn.matchAgeMin > partnerConn.age || myConn.matchAgeMax < partnerConn.age) return false;
+        if (partnerConn.matchAgeMin > myConn.age || partnerConn.matchAgeMax < myConn.age) return false;
+
+        // check gender matching
+        if (myConn.matchGender != 0 && myConn.matchGender != partnerConn.gender) return false;
+        if (partnerConn.matchGender != 0 && partnerConn.matchGender != myConn.gender) return false;
+
+        // match tags if exists
+
         return true;
     })
 
