@@ -4,59 +4,83 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/tailwind.css">
     <title>Document</title>
 </head>
 <body>
-    <h1>Web RTC Demo</h1>
 
-    <div>
-        <h2>Basic Info</h2>
-        <div>Age: <input type="number" id="localAge" value="18"/></div>
-        <div>Gender: <select id="localGender">
-            <option value="0">Unspecified</option>
-            <option value="1">Male</option>
-            <option value="2">Female</option>
-            <option value="3">Other</option>
-        </select>
-        </div>
-        <div>Tags: <input type="text" id="localTags" /></div>
-
-        <hr/>
-
-        <h2>Match With</h2>
-        <div>Age: <input type="text" id="matchAge" value="18"/></div>
-        <div>Gender: <select id="matchGender">
-            <option value="0">Unspecified</option>
-            <option value="1">Male</option>
-            <option value="2">Female</option>
-            <option value="3">Other</option>
-        </select>
-        </div>
-    </div>
-
-    <hr/>
-
-    <div id="connectionStatus">
-        Disconnected
-    </div>
-
-    <div id="messages">
+    <div class="container mx-auto">
         
+        <h1 class="text-xl">Random Chat</h1>
+        <hr />
+
+        <div class="rounded shadow-md p-1 my-5">
+            <h2 class="text-lg mb-5">Basic Info</h2>
+            <div class="flex flex-row flex-wrap">
+                <div class="flex-initial pr-2 py-2">Age:</div>
+                <div class="flex-auto">
+                    <input type="number" id="localAge" value="18" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                </div>
+            </div>
+            <div class="flex flex-row flex-wrap">
+                <div class="flex-initial pr-2 py-2">Tags:</div>
+                <div class="flex-auto">
+                    <input type="text" id="localTags" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                </div>
+            </div>
+            <div class="flex flex-row flex-wrap">
+                <div class="flex-initial pr-2 py-2">Gender:</div>
+                <div class="flex-auto">
+                    <select id="localGender" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="0">Unspecified</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                        <option value="3">Other</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="rounded shadow-md p-1 my-5">
+            <h2 class="text-lg mb-5">Match With</h2>
+            <div class="flex flex-row flex-wrap"></div>
+                <div class="flex-initial pr-2 py-2">Age:</div>
+                <div class="flex-auto">
+                    <input type="text" id="matchAge" value="18" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                </div>
+            </div>
+            <div class="flex flex-row flex-wrap">
+                <div class="flex-initial pr-2 py-2">Gender:</div>
+                <div class="flex-auto">
+                    <select id="matchGender">
+                        <option value="0">Unspecified</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                        <option value="3">Other</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="rounded p-1">
+            <div id="connectionStatus">
+                Disconnected
+            </div>
+    
+            <div class="flex flex-col">
+                <div class="flex-1 p-5" id="messages">
+                </div>
+                <input type="text" id="inMsg" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+            </div>
+    
+            <div class="flex flex-row mt-5">
+                <input type="button" value="Connect" id="connect" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" />
+                <input type="button" value="Cancel" id="cancel" class="inline-block align-baseline font-bold text-sm text-blue-500 ml-2 py-2 px-4 hover:text-blue-800 cursor-pointer" disabled />
+            </div>
+        </div>
+
     </div>
-    <input type="text" id="inMsg" />
-    <br/>
-
-    <input type="button" value="Connect" id="connect" />
-    <input type="button" value="Cancel" id="cancel" disabled />
-
-    <!-- <select id="availableCameras"></select>
-
-    <div>
-        <div>Height: <input type="number" id="localHeight" value="720" /></div>
-        <div>Width: <input type="number" id="localWidth" value="1280" /></div>
-    </div>
-
-    <video id="localVideo" autoplay playsinline controls="false"/> -->
 
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/jquery.min.js"></script>
