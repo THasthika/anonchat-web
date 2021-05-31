@@ -10,7 +10,8 @@ const $cancel = $('#cancel');
 const $localAge = $('#localAge');
 const $localGender = $('#localGender');
 const $localTags = $('#localTags');
-const $matchAge = $('#matchAge');
+const $matchAgeMin = $('#matchAgeMin');
+const $matchAgeMax = $('#matchAgeMax');
 const $matchGender = $('#matchGender');
 
 const configuration = {'iceServers': [{'urls': 'stun:stun.l.google.com:19302'}]};
@@ -67,7 +68,8 @@ $inMsg.on("keyup", (e) => {
 $localAge.on('change', updateUserInfo);
 $localGender.on('change', updateUserInfo);
 $localTags.on('change', updateUserInfo);
-$matchAge.on('change', updateUserInfo);
+$matchAgeMin.on('change', updateUserInfo);
+$matchAgeMax.on('change', updateUserInfo);
 $matchGender.on('change', updateUserInfo);
 updateUserInfo();
 
@@ -113,26 +115,22 @@ function updateUserInfo() {
         return true;
     })
 
-    const matchAge = $matchAge.val();
-    matchAges = matchAge.split(",");
-    var minAge = 0, maxAge = 0;
-    if (matchAges.length == 1) {
-        minAge = matchAges[0];
-        maxAge = matchAges[0];
-    }
-    if (matchAges.length == 2) {
-        minAge = matchAges[0];
-        maxAge = matchAges[1];
+    const minAge = parseInt($matchAgeMin.val()) || 0;
+    const maxAge = parseInt($matchAgeMax.val()) || 0;
+
+    if (minAge > maxAge) {
+        $matchAgeMin.val(maxAge);
+        return;
     }
 
-    const matchGender = parseInt($matchGender.val());
+    const matchGender = parseInt($matchGender.val()) || 0;
 
     const data = {
         age: age,
         gender: gender,
         tags: tags,
-        matchAgeMin: parseInt(minAge),
-        matchAgeMax: parseInt(maxAge),
+        matchAgeMin: minAge,
+        matchAgeMax: maxAge,
         matchGender: matchGender
     }
 
